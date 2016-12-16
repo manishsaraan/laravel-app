@@ -11,10 +11,11 @@
 |
 */
 
-$factory->define(laravelapp\User::class, function (Faker\Generator $faker) {
+$factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,
+        'username'=>$faker->userName,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
     ];

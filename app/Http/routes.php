@@ -11,41 +11,50 @@
 |
 */
 
-
-/* Route::get('/hello', function () {
-   return view('hello');
+Route::get('/', function () {
+    $users = factory(App\User::class,6)->make();
+    return view('pages.home ',compact('users'));
 });
-Route::get('/ID/{id}', function ($id) {
-  echo $id;die;
+Route::get('/login',function(){
+	dd('please login first');
 });
-Route::get('/user/{name?}', function ($name='manish kuamr') {
-  echo $name;die;
+// Route::get("/about",function(){
+//         $title = "my title";
+       
+//     return view ('pages.about');
+// });
+// Route::get("/contact",function(){ 
+//     return view ('pages.contact');
+// });
+Route::group([
+   //   'middleware'=>'auth'
+	],function(){
+			Route::get("/video",function(){ 
+		    return view ('pages.video');
+		})->name('video')->middleware('jwt.auth');	
+	});
+Route::get('/fullurl',function(){
+	dd(Request::url());
 });
-
-Route::get('role',[
-   'middleware' => 'Role:editor',
-   'uses' => 'TestController@index',
-]);
-Route::get('profile',[
- 
-   'uses' => 'UserController@index',
-]);
-Route::resource('my','MyController');
-Route::controller('test','ImplicitController');
-Route::get('/cookie',function(){
-         return response("Hello",200)->header('Content-Type','text/html')->withcookie('name','manish kumar');
-});
-Route::get('/json',function(){
-         return response()->json(['name'=>'manish','age'=>'23']);
-});
-Route::get('/test', function(){
-   return view('test');
-});
-Route::get('blade', function () {
-   return view('page',array('name' => 'Virat Gandhi'));
-}); */
-Route::get('/home' ,['as'=>'/','uses'=>'SiteController@getHome']);
+//Route::get('/' ,['as'=>'/','uses'=>'SiteController@getHome']);
 Route::get('/about-us',[ 'as'=>'about','uses'=>'SiteController@getAbout']);
 Route::get('/contact-us',['as'=>'contact','uses'=> 'SiteController@getContact']);
-Route::post('contact', 'SiteController@postContact');
-Route::get('user/{name?}','SiteController@getUser');
+
+Route::get('@{user}',function(App\User $user){
+	//$user = App\User::where('username',$user)->first();
+	dd($user);
+});
+
+Route::get('/users',function(){
+	$users = App\User::get();
+	dd($users);
+});
+//Route Groups
+// Route::group([
+// 	'namespace'=>'Dashboard',
+//     'prefix'=>'dashboard'
+// 	],function(){
+// 	Route::get("/",'DashboardController@getHome');
+// 	Route::resource("/users",'DashboardController@getUsers');
+// 	Route::resource("/posts",'DashboardController@getPosts');
+// });

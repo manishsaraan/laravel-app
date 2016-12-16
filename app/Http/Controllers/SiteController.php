@@ -1,26 +1,27 @@
 <?php
 
-namespace laravelapp\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use laravelapp\Http\Requests;
+use App\Http\Requests;
 
 class SiteController extends Controller
 {
    public function getHome()
    {
-   	   return view('home');
+   	  $users = factory(App\User::class,6)->make();
+   	   return view('pages.home',compact('users'));
    }
 
    public function getAbout()
    {
 
-   	   return view('about');
+   	   return view('pages.about');
    }
    public function getContact()
    {
-   	return view('contact');
+   	return view('pages.contact');
    }
    public function postContact(Request $request)
    {

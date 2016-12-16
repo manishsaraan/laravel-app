@@ -31,24 +31,15 @@
             }
 
             .title {
-                font-size: 30px;
+                font-size: 96px;
             }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">
-                    @if($users->count() > 0)
-                    there are {{ $users->count() }} users<br>
-                    @foreach($users as $user)
-                    <b> {{  $user->name }} </b> with email <small>{{ $user->email }}</small><br>
-                    @endforeach
-                    @else 
-                    ther are no users
-                    @endif
-                    
-                </div>
+                <div class="title">{{ $title or 'My New Ttile' }}</div>
+                <span>{{ $name }}</span>
             </div>
         </div>
     </body>
