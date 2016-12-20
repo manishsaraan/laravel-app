@@ -45,10 +45,10 @@ Route::get('@{user}',function(App\User $user){
 	dd($user);
 });
 
-Route::get('/users',function(){
-	$users = App\User::get();
-	dd($users);
-});
+// Route::get('/users',function(){
+// 	$users = App\User::get();
+// 	dd($users);
+// });
 //Route Groups
 // Route::group([
 // 	'namespace'=>'Dashboard',
@@ -58,3 +58,5 @@ Route::get('/users',function(){
 // 	Route::resource("/users",'DashboardController@getUsers');
 // 	Route::resource("/posts",'DashboardController@getPosts');
 // });
+// 
+Route::resource('users','UserController');
