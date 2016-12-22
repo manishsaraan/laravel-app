@@ -1,10 +1,10 @@
  <style>
- 	li.active{
+ 	/*li.active{
  		background: red;
  		color: #fff;
  		border-radius: 3px;
  		width: 80px;
- 	}
+ 	}*/
  </style>
  <header>
  <nav class="navbar navbar-default">

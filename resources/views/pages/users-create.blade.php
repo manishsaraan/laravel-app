@@ -14,11 +14,15 @@
 		<input type="email" name="email" class="form-control">
 	</div>
 	<div class="form-group">
+		<label>Username</label>
+		<input type="text" name="username" class="form-control">
+	</div>
+	<div class="form-group">
 		<label>Password</label>
 		<input type="password" name="password" class="form-control">
 	</div>
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary btn-block">Create</button>
+		<button type="submit" class="btn btn-primary btn-block">Update</button>
 	</div>
 
 </form>

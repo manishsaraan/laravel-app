@@ -42,6 +42,7 @@ class UserController extends Controller
        $user = new User;
        $user->name = $request->input('name');
        $user->email = $request->input('email');
+       $user->username = $request->input('username');
        $user->password = bcrypt($request->input('password'));
        $user->save();
        return redirect('users');
@@ -68,7 +69,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('pages.user-edit',compact('user'));
     }
 
     /**
@@ -80,7 +82,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+     //   if($request->has('name'))
+     //    $user->name = $request->input('name');
+     // if($request->has('email'))
+     //    $user->name = $request->input('email');
+     // if($request->has('password'))
+     //    $user->name = bcrypt($request->input('password'));
+     //    $user->save();
+        $userData = array_filter($request->all());
+        if(isset($userData['password']))
+            $userData['password'] = bcrypt($userData['password']);
+        $user->fill($userData);
+        $user->save();  
+        return redirect('users');
     }
 
     /**
@@ -91,6 +106,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $user = User::find($id);
+        $user->delete();
+        return redirect('users');
+       // User::destroy($id);
     }
 }
